@@ -52,8 +52,8 @@ void analisi_bjt()
     // Stile Grafico 50uA
     g50->SetTitle("Caratteristica Ib = 50 #muA; V_{CE} [V]; I_{C} [mA]");
     g50->SetMarkerStyle(20); // Cerchi pieni
-    g50->SetMarkerColor(kBlue);
-    g50->SetLineColor(kBlue);
+    g50->SetMarkerColor(kGreen);
+    g50->SetLineColor(kGreen);
 
     // Stile Grafico 100uA
     g100->SetTitle("Caratteristica Ib = 100 #muA; V_{CE} [V]; I_{C} [mA]");
@@ -72,18 +72,21 @@ void analisi_bjt()
     // -----------------------------------------------------
     // Fit lineare per |Vce| >= 1V.
     // BJT PNP: Vce negativa. Regione attiva approx da -4.5V a -1.0V.
-    double fit_min = -4.5;
-    double fit_max = -1.0;
+    double fit_min = 1;
+    double fit_max = 4;
 
     // Fit espliciti del tipo a + b*x
     TF1 *f1 = new TF1("fit50", "[0] + [1]*x", fit_min, fit_max);
     TF1 *f2 = new TF1("fit100", "[0] + [1]*x", fit_min, fit_max);
+    TF1 *f3 = new TF1("fit200", "[0] + [1]*x", fit_min, fit_max);
 
     f1->SetParNames("a", "b");
     f2->SetParNames("a", "b");
+    f3->SetParNames("a", "b");
 
     f1->SetLineColor(kCyan);
     f2->SetLineColor(kOrange + 7);
+    f3->SetLineColor(kMagenta);
 
     std::cout << "\n--- Risultati FIT Ib = 50 uA ---" << std::endl;
     g50->Fit(f1, "R");
@@ -98,6 +101,31 @@ void analisi_bjt()
               << " +/- " << f2->GetParError(0)
               << ", b = " << f2->GetParameter(1)
               << " +/- " << f2->GetParError(1) << std::endl;
+
+    std::cout << "\n--- Risultati FIT Ib = 200 uA ---" << std::endl;
+    g200->Fit(f3, "R");
+    std::cout << "Parametri fit (200 uA): a = " << f3->GetParameter(0)
+              << " +/- " << f3->GetParError(0)
+              << ", b = " << f3->GetParameter(1)
+              << " +/- " << f3->GetParError(1) << std::endl;
+
+    //Evaluate Early terminal voltage (V_A) from slopes, by intersection with x axis with erros
+    double VA_50 = -f1->GetParameter(0) / f1->GetParameter(1);
+    double VA_100 = -f2->GetParameter(0) / f2->GetParameter(1);
+    double VA_200 = -f3->GetParameter(0) / f3->GetParameter(1);
+    double err_VA_50 = VA_50 * TMath::Sqrt(TMath::Power(f1->GetParError(0) / f1->GetParameter(0), 2) +
+                                            TMath::Power(f1->GetParError(1) / f1->GetParameter(1), 2));
+    double err_VA_100 = VA_100 * TMath::Sqrt(TMath::Power(f2->GetParError(0) / f2->GetParameter(0), 2) +
+                                              TMath::Power(f2->GetParError(1) / f2->GetParameter(1), 2));
+    double err_VA_200 = VA_200 * TMath::Sqrt(TMath::Power(f3->GetParError(0) / f3->GetParameter(0), 2) +
+                                              TMath::Power(f3->GetParError(1) / f3->GetParameter(1), 2));
+
+
+    std::cout << "\n--- Early Voltage (V_A) ---" << std::endl;
+    std::cout << "V_A (50 uA): " << VA_50 << " +/- " << err_VA_50 << std::endl;
+    std::cout << "V_A (100 uA): " << VA_100 << " +/- " << err_VA_100 << std::endl;
+    std::cout << "V_A (200 uA): " << VA_200 << " +/- " << err_VA_200 << std::endl;
+    
 
     // -----------------------------------------------------
     // 4. Creazione Canvas e TMultiGraph (tutti i dati in unico grafico)
@@ -122,13 +150,16 @@ void analisi_bjt()
     // Disegniamo i fit sopra i dati
     f1->Draw("same");
     f2->Draw("same");
+    f3->Draw("same");
 
     // Legenda comune
     TLegend *leg = new TLegend(0.15, 0.70, 0.45, 0.88);
     leg->AddEntry(g100, "Dati Ib=100 #muA", "lep");
     leg->AddEntry(g200, "Dati Ib=200 #muA", "lep");
+    leg->AddEntry(g50, "Dati Ib=50 #muA", "lep");
     leg->AddEntry(f1, "Fit 100 #muA", "l");
     leg->AddEntry(f2, "Fit 200 #muA", "l");
+    leg->AddEntry(f3, "Fit 50 #muA", "l");
     leg->Draw();
 
     // -----------------------------------------------------
@@ -139,16 +170,15 @@ void analisi_bjt()
     double V_target = -3.0; // Volts
 
     // Valutiamo la Ic dalle funzioni di fit
-    double Ic_100_val = f1->Eval(V_target);
-    double Ic_200_val = f2->Eval(V_target);
+    double Ic_50_val = f1->Eval(V_target);
+    double Ic_100_val = f2->Eval(V_target);
 
     // Correnti di base (mA)
+    double Ib_50 = 0.05; // 50 uA
     double Ib_100 = 0.1; // 100 uA
-    double Ib_200 = 0.2; // 200 uA
-    double delta_Ib = Ib_200 - Ib_100;
+    double delta_Ib = Ib_100 - Ib_50;
 
-    double delta_Ic = Ic_200_val - Ic_100_val;
-
+    double delta_Ic = Ic_100_val - Ic_50_val;
     // Beta è positivo
     double beta = std::abs(delta_Ic) / delta_Ib;
 
@@ -156,7 +186,7 @@ void analisi_bjt()
     std::cout << " CALCOLO BETA (Guadagno di corrente) a Vce = " << V_target << " V" << std::endl;
     std::cout << "=============================================" << std::endl;
     std::cout << "Ic (fit) @ 100uA: " << Ic_100_val << " mA" << std::endl;
-    std::cout << "Ic (fit) @ 200uA: " << Ic_200_val << " mA" << std::endl;
+    std::cout << "Ic (fit) @ 50uA: " << Ic_50_val << " mA" << std::endl;
     std::cout << "Delta Ic:         " << std::abs(delta_Ic) << " mA" << std::endl;
     std::cout << "Delta Ib:         " << delta_Ib << " mA" << std::endl;
     std::cout << "---------------------------------------------" << std::endl;
