@@ -109,10 +109,11 @@ void analisi_bjt()
               << ", b = " << f3->GetParameter(1)
               << " +/- " << f3->GetParError(1) << std::endl;
 
-    //Evaluate Early terminal voltage (V_A) from slopes, by intersection with x axis with erros
+    //Evaluate Early terminal voltage (V_A) from slopes (CONTROLLA CHE SIA GIUSTO)
     double VA_50 = -f1->GetParameter(0) / f1->GetParameter(1);
     double VA_100 = -f2->GetParameter(0) / f2->GetParameter(1);
     double VA_200 = -f3->GetParameter(0) / f3->GetParameter(1);
+    
     double err_VA_50 = VA_50 * TMath::Sqrt(TMath::Power(f1->GetParError(0) / f1->GetParameter(0), 2) +
                                             TMath::Power(f1->GetParError(1) / f1->GetParameter(1), 2));
     double err_VA_100 = VA_100 * TMath::Sqrt(TMath::Power(f2->GetParError(0) / f2->GetParameter(0), 2) +
