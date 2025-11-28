@@ -37,8 +37,9 @@ void analisi_bjt()
     // Il formato stringa "%lg %lg %lg %lg" indica a ROOT di leggere 4 colonne di double
     // L'ordine interpretato è sempre: X, Y, ex, ey
 
-    TGraphErrors *g100 = new TGraphErrors("caratteristica_100.txt", "%lg %lg %lg %lg");
-    TGraphErrors *g200 = new TGraphErrors("caratteristica_200.txt", "%lg %lg %lg %lg");
+    TGraphErrors *g50 = new TGraphErrors("data/50.txt", "%lg %lg %lg %lg");
+    TGraphErrors *g100 = new TGraphErrors("data/100.txt", "%lg %lg %lg %lg");
+    TGraphErrors *g200 = new TGraphErrors("data/200.txt", "%lg %lg %lg %lg");
 
     // Controllo di sicurezza se i file sono vuoti o non letti
     if (g100->GetN() == 0 || g200->GetN() == 0)
@@ -46,6 +47,13 @@ void analisi_bjt()
         std::cout << "Errore: File non trovati o vuoti. Controlla i nomi e il formato." << std::endl;
         return;
     }
+
+    
+    // Stile Grafico 50uA
+    g50->SetTitle("Caratteristica Ib = 50 #muA; V_{CE} [V]; I_{C} [mA]");
+    g50->SetMarkerStyle(20); // Cerchi pieni
+    g50->SetMarkerColor(kBlue);
+    g50->SetLineColor(kBlue);
 
     // Stile Grafico 100uA
     g100->SetTitle("Caratteristica Ib = 100 #muA; V_{CE} [V]; I_{C} [mA]");
@@ -68,8 +76,8 @@ void analisi_bjt()
     double fit_max = -1.0;
 
     // Fit espliciti del tipo a + b*x
-    TF1 *f1 = new TF1("fit100", "[0] + [1]*x", fit_min, fit_max);
-    TF1 *f2 = new TF1("fit200", "[0] + [1]*x", fit_min, fit_max);
+    TF1 *f1 = new TF1("fit50", "[0] + [1]*x", fit_min, fit_max);
+    TF1 *f2 = new TF1("fit100", "[0] + [1]*x", fit_min, fit_max);
 
     f1->SetParNames("a", "b");
     f2->SetParNames("a", "b");
@@ -77,16 +85,16 @@ void analisi_bjt()
     f1->SetLineColor(kCyan);
     f2->SetLineColor(kOrange + 7);
 
-    std::cout << "\n--- Risultati FIT Ib = 100 uA ---" << std::endl;
-    g100->Fit(f1, "R");
-    std::cout << "Parametri fit (100 uA): a = " << f1->GetParameter(0)
+    std::cout << "\n--- Risultati FIT Ib = 50 uA ---" << std::endl;
+    g50->Fit(f1, "R");
+    std::cout << "Parametri fit (50 uA): a = " << f1->GetParameter(0)
               << " +/- " << f1->GetParError(0)
               << ", b = " << f1->GetParameter(1)
               << " +/- " << f1->GetParError(1) << std::endl;
 
-    std::cout << "\n--- Risultati FIT Ib = 200 uA ---" << std::endl;
-    g200->Fit(f2, "R");
-    std::cout << "Parametri fit (200 uA): a = " << f2->GetParameter(0)
+    std::cout << "\n--- Risultati FIT Ib = 100 uA ---" << std::endl;
+    g100->Fit(f2, "R");
+    std::cout << "Parametri fit (100 uA): a = " << f2->GetParameter(0)
               << " +/- " << f2->GetParError(0)
               << ", b = " << f2->GetParameter(1)
               << " +/- " << f2->GetParError(1) << std::endl;
@@ -100,12 +108,14 @@ void analisi_bjt()
 
     // Creiamo un TMultiGraph per sovrapporre i dataset
     TMultiGraph *mg = new TMultiGraph();
+    mg->Add(g50, "P");
     mg->Add(g100, "P");
     mg->Add(g200, "P");
     mg->SetTitle("Caratteristiche di Uscita BJT;V_{CE} [V];I_{C} [mA]");
     mg->Draw("A");
 
     // Ridisegniamo i grafici con marker e assicuriamoci che siano visibili
+    g50->Draw("P same");
     g100->Draw("P same");
     g200->Draw("P same");
 
