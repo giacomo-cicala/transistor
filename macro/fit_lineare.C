@@ -142,7 +142,7 @@ void analisi_bjt()
     mg->Add(g50, "P");
     mg->Add(g100, "P");
     // mg->Add(g200, "P"); // COMMENTATO: 200 uA
-    mg->SetTitle("Caratteristiche di Uscita BJT;V_{CE} [V];I_{C} [mA]");
+    mg->SetTitle("Caratteristiche di Uscita BJT P-N-P;V_{CE} (V);I_{C} (mA)");
     mg->Draw("A");
 
     // Ridisegniamo i grafici con marker e assicuriamoci che siano visibili
@@ -157,12 +157,9 @@ void analisi_bjt()
 
     // Legenda comune
     TLegend *leg = new TLegend(0.15, 0.70, 0.45, 0.88);
-    leg->AddEntry(g100, "Dati Ib=100 #muA", "lep");
-    // leg->AddEntry(g200, "Dati Ib=200 #muA", "lep");
-    leg->AddEntry(g50, "Dati Ib=50 #muA", "lep");
-    leg->AddEntry(f2, "Fit 100 #muA", "l");
-    // leg->AddEntry(f3, "Fit 200 #muA", "l");
-    leg->AddEntry(f1, "Fit 50 #muA", "l");
+    leg->AddEntry(g100, "Ib=100 #muA", "lep");
+    // leg->AddEntry(g200, "Ib=200 #muA", "lep");
+    leg->AddEntry(g50, "Ib=50 #muA", "lep");
     leg->Draw();
 
     // -----------------------------------------------------
