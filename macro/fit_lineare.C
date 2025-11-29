@@ -39,33 +39,33 @@ void analisi_bjt()
 
     TGraphErrors *g50 = new TGraphErrors("data/50.txt", "%lg %lg %lg %lg");
     TGraphErrors *g100 = new TGraphErrors("data/100.txt", "%lg %lg %lg %lg");
-    TGraphErrors *g200 = new TGraphErrors("data/200.txt", "%lg %lg %lg %lg");
+    // TGraphErrors *g200 = new TGraphErrors("data/200.txt", "%lg %lg %lg %lg"); // COMMENTATO: 200 uA
 
     // Controllo di sicurezza se i file sono vuoti o non letti
-    if (g100->GetN() == 0 || g200->GetN() == 0)
+    if (g50->GetN() == 0 || g100->GetN() == 0)
     {
         std::cout << "Errore: File non trovati o vuoti. Controlla i nomi e il formato." << std::endl;
         return;
     }
 
     
-    // Stile Grafico 50uA
+    // Stile Grafico 50uA (BLU)
     g50->SetTitle("Caratteristica Ib = 50 #muA; V_{CE} [V]; I_{C} [mA]");
     g50->SetMarkerStyle(20); // Cerchi pieni
-    g50->SetMarkerColor(kGreen);
-    g50->SetLineColor(kGreen);
+    g50->SetMarkerColor(kBlue);
+    g50->SetLineColor(kBlue);
 
-    // Stile Grafico 100uA
+    // Stile Grafico 100uA (ROSSO)
     g100->SetTitle("Caratteristica Ib = 100 #muA; V_{CE} [V]; I_{C} [mA]");
     g100->SetMarkerStyle(20); // Cerchi pieni
-    g100->SetMarkerColor(kBlue);
-    g100->SetLineColor(kBlue);
+    g100->SetMarkerColor(kRed);
+    g100->SetLineColor(kRed);
 
     // Stile Grafico 200uA
-    g200->SetTitle("Caratteristica Ib = 200 #muA; V_{CE} [V]; I_{C} [mA]");
-    g200->SetMarkerStyle(21); // Quadrati pieni
-    g200->SetMarkerColor(kRed);
-    g200->SetLineColor(kRed);
+    // g200->SetTitle("Caratteristica Ib = 200 #muA; V_{CE} [V]; I_{C} [mA]");
+    // g200->SetMarkerStyle(21); // Quadrati pieni
+    // g200->SetMarkerColor(kRed);
+    // g200->SetLineColor(kRed);
 
     // -----------------------------------------------------
     // 3. Fitting (Regione Attiva)
@@ -78,15 +78,16 @@ void analisi_bjt()
     // Fit espliciti del tipo a + b*x
     TF1 *f1 = new TF1("fit50", "[0] + [1]*x", fit_min, fit_max);
     TF1 *f2 = new TF1("fit100", "[0] + [1]*x", fit_min, fit_max);
-    TF1 *f3 = new TF1("fit200", "[0] + [1]*x", fit_min, fit_max);
+    // TF1 *f3 = new TF1("fit200", "[0] + [1]*x", fit_min, fit_max); // COMMENTATO: 200 uA
 
     f1->SetParNames("a", "b");
     f2->SetParNames("a", "b");
-    f3->SetParNames("a", "b");
+    // f3->SetParNames("a", "b");
 
-    f1->SetLineColor(kCyan);
-    f2->SetLineColor(kOrange + 7);
-    f3->SetLineColor(kMagenta);
+    // Imposta colori dei fit: f1 -> blu (50uA), f2 -> rosso (100uA)
+    f1->SetLineColor(kBlue);
+    f2->SetLineColor(kRed);
+    // f3->SetLineColor(kMagenta);
 
     std::cout << "\n--- Risultati FIT Ib = 50 uA ---" << std::endl;
     g50->Fit(f1, "R");
@@ -102,30 +103,31 @@ void analisi_bjt()
               << ", b = " << f2->GetParameter(1)
               << " +/- " << f2->GetParError(1) << std::endl;
 
-    std::cout << "\n--- Risultati FIT Ib = 200 uA ---" << std::endl;
-    g200->Fit(f3, "R");
-    std::cout << "Parametri fit (200 uA): a = " << f3->GetParameter(0)
-              << " +/- " << f3->GetParError(0)
-              << ", b = " << f3->GetParameter(1)
-              << " +/- " << f3->GetParError(1) << std::endl;
+    // Risultati per 200 uA commentati
+    // std::cout << "\n--- Risultati FIT Ib = 200 uA ---" << std::endl;
+    // g200->Fit(f3, "R");
+    // std::cout << "Parametri fit (200 uA): a = " << f3->GetParameter(0)
+    //           << " +/- " << f3->GetParError(0)
+    //           << ", b = " << f3->GetParameter(1)
+    //           << " +/- " << f3->GetParError(1) << std::endl;
 
     //Evaluate Early terminal voltage (V_A) from slopes (CONTROLLA CHE SIA GIUSTO)
     double VA_50 = -f1->GetParameter(0) / f1->GetParameter(1);
     double VA_100 = -f2->GetParameter(0) / f2->GetParameter(1);
-    double VA_200 = -f3->GetParameter(0) / f3->GetParameter(1);
+    // double VA_200 = -f3->GetParameter(0) / f3->GetParameter(1); // COMMENTATO: 200 uA
     
     double err_VA_50 = VA_50 * TMath::Sqrt(TMath::Power(f1->GetParError(0) / f1->GetParameter(0), 2) +
                                             TMath::Power(f1->GetParError(1) / f1->GetParameter(1), 2));
     double err_VA_100 = VA_100 * TMath::Sqrt(TMath::Power(f2->GetParError(0) / f2->GetParameter(0), 2) +
                                               TMath::Power(f2->GetParError(1) / f2->GetParameter(1), 2));
-    double err_VA_200 = VA_200 * TMath::Sqrt(TMath::Power(f3->GetParError(0) / f3->GetParameter(0), 2) +
-                                              TMath::Power(f3->GetParError(1) / f3->GetParameter(1), 2));
+    // double err_VA_200 = VA_200 * TMath::Sqrt(TMath::Power(f3->GetParError(0) / f3->GetParameter(0), 2) +
+    //                                           TMath::Power(f3->GetParError(1) / f3->GetParameter(1), 2));
 
 
     std::cout << "\n--- Early Voltage (V_A) ---" << std::endl;
     std::cout << "V_A (50 uA): " << VA_50 << " +/- " << err_VA_50 << std::endl;
     std::cout << "V_A (100 uA): " << VA_100 << " +/- " << err_VA_100 << std::endl;
-    std::cout << "V_A (200 uA): " << VA_200 << " +/- " << err_VA_200 << std::endl;
+    // std::cout << "V_A (200 uA): " << VA_200 << " +/- " << err_VA_200 << std::endl;
     
 
     // -----------------------------------------------------
@@ -139,28 +141,28 @@ void analisi_bjt()
     TMultiGraph *mg = new TMultiGraph();
     mg->Add(g50, "P");
     mg->Add(g100, "P");
-    mg->Add(g200, "P");
+    // mg->Add(g200, "P"); // COMMENTATO: 200 uA
     mg->SetTitle("Caratteristiche di Uscita BJT;V_{CE} [V];I_{C} [mA]");
     mg->Draw("A");
 
     // Ridisegniamo i grafici con marker e assicuriamoci che siano visibili
     g50->Draw("P same");
     g100->Draw("P same");
-    g200->Draw("P same");
+    // g200->Draw("P same");
 
     // Disegniamo i fit sopra i dati
     f1->Draw("same");
     f2->Draw("same");
-    f3->Draw("same");
+    // f3->Draw("same");
 
     // Legenda comune
     TLegend *leg = new TLegend(0.15, 0.70, 0.45, 0.88);
     leg->AddEntry(g100, "Dati Ib=100 #muA", "lep");
-    leg->AddEntry(g200, "Dati Ib=200 #muA", "lep");
+    // leg->AddEntry(g200, "Dati Ib=200 #muA", "lep");
     leg->AddEntry(g50, "Dati Ib=50 #muA", "lep");
-    leg->AddEntry(f1, "Fit 100 #muA", "l");
-    leg->AddEntry(f2, "Fit 200 #muA", "l");
-    leg->AddEntry(f3, "Fit 50 #muA", "l");
+    leg->AddEntry(f2, "Fit 100 #muA", "l");
+    // leg->AddEntry(f3, "Fit 200 #muA", "l");
+    leg->AddEntry(f1, "Fit 50 #muA", "l");
     leg->Draw();
 
     // -----------------------------------------------------

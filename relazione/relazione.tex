@@ -25,7 +25,7 @@
 
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
-prova
+    prova
 \end{abstract}
 
 \section*{Introduzione}
@@ -33,7 +33,7 @@ prova
 \section*{Apparato sperimentale e svolgimento}
 
 \section*{Risultati e discussione}
-Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie di valori I-V rispettivamente per corrente di base di 50$\mu$A e 100$\mu$A.
+Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie di valori I-V rispettivamente per corrente di base di 50$\mu$A e 100$\mu$A. Per il calcolo degli errori associati alle misure di tensione e corrente si rimanda all'\cref{appendice:errori_I-V}.
 
 \sisetup{
     table-number-alignment = center,
@@ -41,76 +41,243 @@ Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie
     table-figures-decimal = 8
 }
 
-\begin{table}[h]
-\centering
-\begin{tabular}{
-    S[table-format=1.4] % 4 decimali per il multimetro (es. 0.0568)
-    S[table-format=1.3] % 3 decimali max per l'oscilloscopio
-    S[table-format=1.2] % Scala
-    S[table-format=1.3] % Risoluzione
-    S[table-format=1.3] % Errore (varia tra 2 e 3 decimali)
-}
-\toprule
-{ \boldmath $V$ } &
-{ \boldmath $I$ } &
-{ \boldmath $F.S._{osc}$ } &
-{ \boldmath $\sigma_{V}$ } &
-{ \boldmath $\sigma_{I}$ } \\
+\begin{table}[hbtp]
+    \centering
+    % --- INIZIO PRIMA META' (SINISTRA) ---
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+        \centering
+        \begin{tabular}[t]{
+                S[table-format=1.3]
+                S[table-format=2.2]
+                S[table-format=1.3]
+                S[table-format=1.2]
+                S[table-format=1.1]
+            }
+            \toprule
+            { \boldmath $V_{CE}$ } & { \boldmath $I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
+            { (V) }                & { (mA) }              & { (V) }                    & { (mA) }                   & { (V/div) }                \\
+            \midrule
+            4.00                   & 10.97                 & 0.16                       & 0.05                       & 1                          \\
+            3.80                   & 10.92                 & 0.15                       & 0.05                       & 1                          \\
+            3.60                   & 10.86                 & 0.15                       & 0.05                       & 1                          \\
+            3.40                   & 10.80                 & 0.14                       & 0.05                       & 1                          \\
+            3.20                   & 10.73                 & 0.14                       & 0.05                       & 1                          \\
+            3.00                   & 10.62                 & 0.10                       & 0.05                       & 0.5                        \\
+            2.80                   & 10.53                 & 0.10                       & 0.05                       & 0.5                        \\
+            2.60                   & 10.46                 & 0.09                       & 0.05                       & 0.5                        \\
+            2.40                   & 10.39                 & 0.09                       & 0.05                       & 0.5                        \\
+            2.20                   & 10.32                 & 0.08                       & 0.05                       & 0.5                        \\
+            2.00                   & 10.24                 & 0.08                       & 0.05                       & 0.5                        \\
+            1.80                   & 10.14                 & 0.07                       & 0.05                       & 0.5                        \\
+            1.60                   & 10.05                 & 0.07                       & 0.05                       & 0.5                        \\
+            1.40                   & 9.97                  & 0.07                       & 0.04                       & 0.5                        \\
+            1.20                   & 9.86                  & 0.06                       & 0.04                       & 0.5                        \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill % Questo comando spinge le due minipage ai lati opposti
+    % --- INIZIO SECONDA META' (DESTRA) ---
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        % NOTA: Intestazioni ripetute qui per chiarezza
+        \begin{tabular}[t]{
+                S[table-format=1.3]
+                S[table-format=2.2]
+                S[table-format=1.3]
+                S[table-format=1.2]
+                S[table-format=1.1]
+            }
+            \toprule
+            { \boldmath $V_{CE}$ } & { \boldmath $I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
+            { (V) }                & { (mA) }              & { (V) }                    & { (mA) }                   & { (V/div) }                \\
+            \midrule
+            1.00                   & 9.75                  & 0.04                       & 0.04                       & 0.2                        \\
+            0.80                   & 9.62                  & 0.03                       & 0.04                       & 0.2                        \\
+            0.60                   & 9.49                  & 0.03                       & 0.04                       & 0.2                        \\
+            0.52                   & 9.41                  & 0.03                       & 0.04                       & 0.2                        \\
+            0.44                   & 9.34                  & 0.02                       & 0.04                       & 0.2                        \\
+            0.400                  & 9.27                  & 0.016                      & 0.04                       & 0.1                        \\
+            0.360                  & 9.22                  & 0.015                      & 0.04                       & 0.1                        \\
+            0.320                  & 9.15                  & 0.014                      & 0.04                       & 0.1                        \\
+            0.280                  & 8.99                  & 0.013                      & 0.04                       & 0.1                        \\
+            0.240                  & 8.63                  & 0.012                      & 0.04                       & 0.1                        \\
+            0.200                  & 7.77                  & 0.012                      & 0.04                       & 0.1                        \\
+            0.180                  & 7.08                  & 0.011                      & 0.04                       & 0.1                        \\
+            0.160                  & 5.97                  & 0.011                      & 0.04                       & 0.1                        \\
+            0.140                  & 4.81                  & 0.011                      & 0.04                       & 0.1                        \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \caption{Misure di tensione e corrente per $I_{B} = 50 \mu A$. La prima colonna riporta le tensioni collettore-emettitore, la seconda le correnti di collettore, la terza gli errori sulla misure di tensione, la quarta gli errori sulle misure di corrente, la quinta il fondo scala dell'oscilloscopio.}
 
-{ (V) } & { (mA) } & { (V/div) } & { (V) } & { (mA) } \\
-\midrule
-0.0568 & 0.052 & 0.02 & 0.002 & 0.003 \\
-0.1453 & 0.140 & 0.05 & 0.005 & 0.007 \\
-0.2288 & 0.220 & 0.05 & 0.005 & 0.008 \\
-0.2980 & 0.300 & 0.10 & 0.010 & 0.013 \\
-0.3773 & 0.380 & 0.10 & 0.010 & 0.015 \\
-0.4537 & 0.460 & 0.10 & 0.010 & 0.017 \\
-0.5316 & 0.540 & 0.10 & 0.010 & 0.019 \\
-0.6350 & 0.64  & 0.20 & 0.020 & 0.03 \\ 
-0.7090 & 0.72  & 0.20 & 0.020 & 0.03 \\ 
-0.8150 & 0.80  & 0.20 & 0.020 & 0.03 \\
-\bottomrule
-\end{tabular}
-    
-\caption{Misure di tensione e corrente per $I_{B} = 50 \mu A$. \err{SISTEMARE I VALORI CORRETTI}}
-\label{tab:50uA}
+    \label{tab:50uA}
 \end{table}
 
 \begin{table}[h]
-\centering
-\begin{tabular}{
-    S[table-format=1.4] % 4 decimali per il multimetro (es. 0.0568)
-    S[table-format=1.3] % 3 decimali max per l'oscilloscopio
-    S[table-format=1.2] % Scala
-    S[table-format=1.3] % Risoluzione
-    S[table-format=1.3] % Errore (varia tra 2 e 3 decimali)
-}
-\toprule
-{ \boldmath $V$ } &
-{ \boldmath $I$ } &
-{ \boldmath $F.S._{osc}$ } &
-{ \boldmath $\sigma_{V}$ } &
-{ \boldmath $\sigma_{I}$ } \\
+    \centering
+    % --- META' SINISTRA (Righe 1-32) ---
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt} % Trucco per allineamento
+        \centering
+        \begin{tabular}[t]{
+                S[table-format=1.3] % V_CE
+                S[table-format=2.2] % I_C (serve 2.2 per il 20.xx)
+                S[table-format=1.3] % err V (serve 1.3 per i 0.00x)
+                S[table-format=1.2] % err I
+                S[table-format=1.1] % F.S.
+            }
+            \toprule
+            { \boldmath $V_{CE}$ } & { \boldmath $I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
+            { (V) }                & { (mA) }              & { (V) }                & { (mA) }                    & { (V/div) }                   \\
+            \midrule
+            4.00                   & 20.68                 & 0.16                       & 0.06                       & 1                          \\
+            3.80                   & 20.65                 & 0.15                       & 0.06                       & 1                          \\
+            3.60                   & 20.56                 & 0.15                       & 0.06                       & 1                          \\
+            3.40                   & 20.44                 & 0.14                       & 0.06                       & 1                          \\
+            3.20                   & 20.31                 & 0.14                       & 0.06                       & 1                          \\
+            3.00                   & 20.15                 & 0.13                       & 0.06                       & 1                          \\
+            2.90                   & 19.89                 & 0.10                       & 0.06                       & 0.5                        \\
+            2.80                   & 19.81                 & 0.10                       & 0.06                       & 0.5                        \\
+            2.70                   & 19.70                 & 0.10                       & 0.06                       & 0.5                        \\
+            2.60                   & 19.61                 & 0.09                       & 0.06                       & 0.5                        \\
+            2.50                   & 19.54                 & 0.09                       & 0.06                       & 0.5                        \\
+            2.40                   & 19.44                 & 0.09                       & 0.06                       & 0.5                        \\
+            2.30                   & 19.32                 & 0.09                       & 0.06                       & 0.5                        \\
+            2.20                   & 19.21                 & 0.08                       & 0.06                       & 0.5                        \\
+            2.10                   & 19.12                 & 0.08                       & 0.06                       & 0.5                        \\
+            2.00                   & 19.02                 & 0.08                       & 0.06                       & 0.5                        \\
+            1.90                   & 18.88                 & 0.08                       & 0.06                       & 0.5                        \\
+            1.80                   & 18.80                 & 0.07                       & 0.06                       & 0.5                        \\
+            1.70                   & 18.70                 & 0.07                       & 0.06                       & 0.5                        \\
+            1.60                   & 18.61                 & 0.07                       & 0.06                       & 0.5                        \\
+            1.50                   & 18.48                 & 0.07                       & 0.06                       & 0.5                        \\
+            1.40                   & 18.38                 & 0.07                       & 0.06                       & 0.5                        \\
+            1.30                   & 18.26                 & 0.06                       & 0.06                       & 0.5                        \\
+            1.20                   & 18.17                 & 0.06                       & 0.06                       & 0.5                        \\
+            1.10                   & 18.04                 & 0.06                       & 0.06                       & 0.5                        \\
+            1.00                   & 17.91                 & 0.04                       & 0.06                       & 0.2                        \\
+            0.92                   & 17.82                 & 0.03                       & 0.06                       & 0.2                        \\
+            0.84                   & 17.70                 & 0.03                       & 0.06                       & 0.2                        \\
+            0.76                   & 17.60                 & 0.03                       & 0.06                       & 0.2                        \\
+            0.68                   & 17.47                 & 0.03                       & 0.06                       & 0.2                        \\
+            0.60                   & 17.31                 & 0.03                       & 0.06                       & 0.2                        \\
+            0.52                   & 17.11                 & 0.03                       & 0.06                       & 0.2                        \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    % --- META' DESTRA (Righe 33-64) ---
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt} % Trucco per allineamento
+        \centering
+        \begin{tabular}[t]{
+                S[table-format=1.3]
+                S[table-format=2.2]
+                S[table-format=1.3]
+                S[table-format=1.2]
+                S[table-format=1.1]
+            }
+            \toprule
+            { \boldmath $V_{CE}$ } & { \boldmath $I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
+            { (V) }                & { (mA) }              & { (V) }                & { (mA) }                    & { (V/div) }                   \\
+            \midrule
+            0.44                   & 16.80                 & 0.02                       & 0.06                       & 0.2                        \\
+            0.40                   & 16.61                 & 0.02                       & 0.05                       & 0.2                        \\
+            0.380                  & 16.10                 & 0.015                      & 0.05                       & 0.1                        \\
+            0.340                  & 15.85                 & 0.014                      & 0.05                       & 0.1                        \\
+            0.320                  & 15.60                 & 0.014                      & 0.05                       & 0.1                        \\
+            0.300                  & 15.28                 & 0.013                      & 0.05                       & 0.1                        \\
+            0.290                  & 15.05                 & 0.010                      & 0.05                       & 0.05                       \\
+            0.280                  & 14.85                 & 0.010                      & 0.05                       & 0.05                       \\
+            0.270                  & 14.60                 & 0.010                      & 0.05                       & 0.05                       \\
+            0.260                  & 14.35                 & 0.009                      & 0.05                       & 0.05                       \\
+            0.250                  & 14.04                 & 0.009                      & 0.05                       & 0.05                       \\
+            0.240                  & 13.65                 & 0.009                      & 0.05                       & 0.05                       \\
+            0.230                  & 13.27                 & 0.009                      & 0.05                       & 0.05                       \\
+            0.220                  & 12.80                 & 0.008                      & 0.05                       & 0.05                       \\
+            0.210                  & 12.30                 & 0.008                      & 0.05                       & 0.05                       \\
+            0.200                  & 11.70                 & 0.008                      & 0.05                       & 0.05                       \\
+            0.190                  & 11.07                 & 0.008                      & 0.05                       & 0.05                       \\
+            0.180                  & 10.30                 & 0.007                      & 0.05                       & 0.05                       \\
+            0.170                  & 9.49                  & 0.007                      & 0.04                       & 0.05                       \\
+            0.160                  & 8.62                  & 0.007                      & 0.04                       & 0.05                       \\
+            0.150                  & 7.75                  & 0.007                      & 0.04                       & 0.05                       \\
+            0.140                  & 6.75                  & 0.007                      & 0.04                       & 0.05                       \\
+            0.130                  & 5.76                  & 0.006                      & 0.04                       & 0.05                       \\
+            0.120                  & 4.87                  & 0.006                      & 0.04                       & 0.05                       \\
+            0.110                  & 4.07                  & 0.006                      & 0.04                       & 0.05                       \\
+            0.100                  & 3.27                  & 0.004                      & 0.03                       & 0.02                       \\
+            0.092                  & 2.68                  & 0.003                      & 0.03                       & 0.02                       \\
+            0.084                  & 2.13                  & 0.003                      & 0.03                       & 0.02                       \\
+            0.076                  & 1.68                  & 0.003                      & 0.03                       & 0.02                       \\
+            0.068                  & 1.29                  & 0.003                      & 0.03                       & 0.02                       \\
+            0.060                  & 0.96                  & 0.003                      & 0.03                       & 0.02                       \\
+            \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \caption{Misure di tensione e corrente per $I_{B} = 100 \mu A$. La prima colonna riporta le tensioni collettore-emettitore, la seconda le correnti di collettore, la terza gli errori sulla misure di tensione, la quarta gli errori sulle misure di corrente, la quinta il fondo scala dell'oscilloscopio.}
+    \label{tab:100uA}
 
-{ (V) } & { (mA) } & { (V/div) } & { (V) } & { (mA) } \\
-\midrule
-0.0568 & 0.052 & 0.02 & 0.002 & 0.003 \\
-0.1453 & 0.140 & 0.05 & 0.005 & 0.007 \\
-0.2288 & 0.220 & 0.05 & 0.005 & 0.008 \\
-0.2980 & 0.300 & 0.10 & 0.010 & 0.013 \\
-0.3773 & 0.380 & 0.10 & 0.010 & 0.015 \\
-0.4537 & 0.460 & 0.10 & 0.010 & 0.017 \\
-0.5316 & 0.540 & 0.10 & 0.010 & 0.019 \\
-0.6350 & 0.64  & 0.20 & 0.020 & 0.03 \\ 
-0.7090 & 0.72  & 0.20 & 0.020 & 0.03 \\ 
-0.8150 & 0.80  & 0.20 & 0.020 & 0.03 \\
-\bottomrule
-\end{tabular}
-    
-\caption{Misure di tensione e corrente per $I_{B} = 100 \mu A$. \err{SISTEMARE I VALORI CORRETTI}}
-\label{tab:100uA}
 \end{table}
 
+Dalle caratteristiche di uscita del transistor per le due correnti di base riportate in \cref{fig:fit_caratteristiche}, si sono eseguiti due fit lineari nella regione attiva del transistor (\err{scegli})
+\begin{equation}
+    I_{C}= a+bV_{CE}
+\end{equation}
+
+\noindent
+per ottenere il valore della tensione di Early
+
+\begin{equation}
+    V_{A} = -\frac{a}{b}
+\end{equation}
+
+\noindent
+I valori dei parametri di fit per le due correnti di base sono i seguenti:
+
+\begin{equation*}
+    a_{50} = (\cdots \pm \cdots) \text{ mV} \hspace{2cm} b_{50} = (\cdots \pm \cdots) \text{k}\Omega^{-1}
+\end{equation*}
+\begin{equation*}
+    a_{100} = (\cdots \pm \cdots) \text{ mV} \hspace{2cm} b_{100} = (\cdots \pm \cdots) \text{k}\Omega^{-1}
+\end{equation*}
+
+\noindent
+da cui si ottengono i valori di tensione di Early
+
+\begin{equation*}
+    V_{A,50} = (\cdots \pm \cdots) \text{ V} \hspace{2cm} V_{A,100} = (\cdots \pm \cdots) \text{ V}
+\end{equation*}
+
+\noindent
+le cui incertezze sono state calcolate come descritto nell'\cref{appendice:errori_VA}.
+
+
+
+Si può ottenere inoltre una stima (\err{senza incertezza}) del guadagno di corrente
+
+\begin{equation}
+    \beta = \frac{\Delta I_{C}}{\Delta I_{B}}
+\end{equation}
+
+\noindent
+dove $\Delta I_{C}$ è la differenza tra le correnti di collettore misurate per le due correnti di base alla stessa tensione di collettore, e $\Delta I_{B}$ è la differenza tra le due correnti di base. Scegliendo come tensione di collettore (\err{decidi}) V, si ottiene
+
+\begin{equation*}
+    \beta = \cdots
+\end{equation*}
+
+\err{DISCUSSIONE RISULTATI}
+
+
+\section*{Conclusioni}
+
+\appendix
+\section{Appendici}
+\subsection{Calcolo degli errori per tensioni e correnti}
+\label{appendice:errori_I-V}
 
 La risoluzione dell'oscilloscopio (e quindi l'errore sulla lettura) $\sigma_{l}$ è stata calcolata come
 \begin{equation}
@@ -127,48 +294,21 @@ dove l'errore del costruttore è
 
 \begin{equation}
     \frac{\sigma_{c}}{V_{mis}} = 3\%
-\end{equation} 
+\end{equation}
 
 \noindent
-con $V_{mis}$ tensione misurata; l'errore sullo zero dell'oscilloscopio è stato trascurato in quanto si è verificato che fosse trascurabile rispetto agli altri errori, grazie ad un opportuno fondo scala di $5$mV/Div. Invece, l'errore sulla misura di corrente è stato calcolato considerando l'errore del multimetro, che, per il fondo scala utilizzato per tutte le misure $F.S._{mult} = 60$mA, è dato da
+con $V_{mis}$ tensione misurata; l'errore sullo zero dell'oscilloscopio è stato omesso in quanto si è verificato essere trascurabile rispetto agli altri errori, grazie ad un opportuno fondo scala di $5$mV/Div. Invece, l'errore sulla misura di corrente è stato calcolato considerando l'errore del multimetro, che, per il fondo scala utilizzato per tutte le misure $F.S._{mult} = 60$mA, è dato da
 \begin{equation}
     \frac{\sigma_{I}}{I_{mis}} = 1.5\% + 3 \text{ digits}
 \end{equation}
 
-Dalle caratteristiche di uscita del transistor per le due correnti di base riportate in \cref{fig:caratteristiche}, si sono eseguiti due fit lineari nella regione attiva del transistor (\err{scegli})
-\begin{equation}
-    I= a+bV
-\end{equation}
-
-\noindent
-per ottenere il valore della tensione di Early
+\subsection{Calcolo dell'errore sulla tensione di Early}
+\label{appendice:errori_VA}
+L'errore sulla tensione di Early è stato calcolato propagando gli errori sui parametri del fit lineare secondo la formula
 
 \begin{equation}
-    V_{A} = -\frac{a}{b}
+    \sigma_{V_{A}} = V_{A} \sqrt{\left(\frac{\sigma_{a}}{a}\right)^{2} + \left(\frac{\sigma_{b}}{b}\right)^{2}}
 \end{equation}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.7\textwidth]{example-image}
-    \caption{Fit lineare delle caratteristiche di uscita del transistor per $I_{B} = 50 \mu A$ (\err{colore}) e per $I_{B} = 100 \mu A$ (\err{colore}). nella regione attiva (\err{scegli}).}
-    \label{fig:fit_calibrazione}
-\end{figure}
-Si può ottenere inoltre una stima (\err{senza incertezza}) del guadagno di corrente
-
-\begin{equation}
-    \beta = \frac{\Delta I_{C}}{\Delta I_{B}}
-\end{equation}
-
-\noindent
-dove $\Delta I_{C}$ è la differenza tra le correnti di collettore misurate per le due correnti di base, alla stessa tensione di collettore (nel nostro caso $V_{CE} = 3V$), e $\Delta I_{B}$ è la differenza tra le due correnti di base.
-
-
-
-
-
-\section*{Conclusioni}
-
-\appendix
-\section{Appendici}
 
 \end{document}
