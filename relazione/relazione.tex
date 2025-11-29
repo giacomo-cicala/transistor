@@ -1,0 +1,174 @@
+\documentclass[12pt,italian]{article}
+\usepackage[italian]{babel}
+\usepackage[a4paper, margin=1.97cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{circuitikz}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsfonts}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\graphicspath{{./images/}}
+
+\newcommand{\err}[1]{\textcolor{red}{#1}}
+\crefname{table}{tab.}{tab.}
+
+\title{Misura della caratteristica di uscita di un BJT P-N-P in configurazione a emettitore comune}
+\author{Enrico Barbuio \\ 0001117553 \and Giacomo Cicala \\ 0001122965} 
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+prova
+\end{abstract}
+
+\section*{Introduzione}
+
+\section*{Apparato sperimentale e svolgimento}
+
+\section*{Risultati e discussione}
+Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie di valori I-V rispettivamente per corrente di base di 50$\mu$A e 100$\mu$A.
+
+\sisetup{
+    table-number-alignment = center,
+    table-figures-integer = 4,
+    table-figures-decimal = 8
+}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{
+    S[table-format=1.4] % 4 decimali per il multimetro (es. 0.0568)
+    S[table-format=1.3] % 3 decimali max per l'oscilloscopio
+    S[table-format=1.2] % Scala
+    S[table-format=1.3] % Risoluzione
+    S[table-format=1.3] % Errore (varia tra 2 e 3 decimali)
+}
+\toprule
+{ \boldmath $V$ } &
+{ \boldmath $I$ } &
+{ \boldmath $F.S._{osc}$ } &
+{ \boldmath $\sigma_{V}$ } &
+{ \boldmath $\sigma_{I}$ } \\
+
+{ (V) } & { (mA) } & { (V/div) } & { (V) } & { (mA) } \\
+\midrule
+0.0568 & 0.052 & 0.02 & 0.002 & 0.003 \\
+0.1453 & 0.140 & 0.05 & 0.005 & 0.007 \\
+0.2288 & 0.220 & 0.05 & 0.005 & 0.008 \\
+0.2980 & 0.300 & 0.10 & 0.010 & 0.013 \\
+0.3773 & 0.380 & 0.10 & 0.010 & 0.015 \\
+0.4537 & 0.460 & 0.10 & 0.010 & 0.017 \\
+0.5316 & 0.540 & 0.10 & 0.010 & 0.019 \\
+0.6350 & 0.64  & 0.20 & 0.020 & 0.03 \\ 
+0.7090 & 0.72  & 0.20 & 0.020 & 0.03 \\ 
+0.8150 & 0.80  & 0.20 & 0.020 & 0.03 \\
+\bottomrule
+\end{tabular}
+    
+\caption{Misure di tensione e corrente per $I_{B} = 50 \mu A$. \err{SISTEMARE I VALORI CORRETTI}}
+\label{tab:50uA}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{
+    S[table-format=1.4] % 4 decimali per il multimetro (es. 0.0568)
+    S[table-format=1.3] % 3 decimali max per l'oscilloscopio
+    S[table-format=1.2] % Scala
+    S[table-format=1.3] % Risoluzione
+    S[table-format=1.3] % Errore (varia tra 2 e 3 decimali)
+}
+\toprule
+{ \boldmath $V$ } &
+{ \boldmath $I$ } &
+{ \boldmath $F.S._{osc}$ } &
+{ \boldmath $\sigma_{V}$ } &
+{ \boldmath $\sigma_{I}$ } \\
+
+{ (V) } & { (mA) } & { (V/div) } & { (V) } & { (mA) } \\
+\midrule
+0.0568 & 0.052 & 0.02 & 0.002 & 0.003 \\
+0.1453 & 0.140 & 0.05 & 0.005 & 0.007 \\
+0.2288 & 0.220 & 0.05 & 0.005 & 0.008 \\
+0.2980 & 0.300 & 0.10 & 0.010 & 0.013 \\
+0.3773 & 0.380 & 0.10 & 0.010 & 0.015 \\
+0.4537 & 0.460 & 0.10 & 0.010 & 0.017 \\
+0.5316 & 0.540 & 0.10 & 0.010 & 0.019 \\
+0.6350 & 0.64  & 0.20 & 0.020 & 0.03 \\ 
+0.7090 & 0.72  & 0.20 & 0.020 & 0.03 \\ 
+0.8150 & 0.80  & 0.20 & 0.020 & 0.03 \\
+\bottomrule
+\end{tabular}
+    
+\caption{Misure di tensione e corrente per $I_{B} = 100 \mu A$. \err{SISTEMARE I VALORI CORRETTI}}
+\label{tab:100uA}
+\end{table}
+
+
+La risoluzione dell'oscilloscopio (e quindi l'errore sulla lettura) $\sigma_{l}$ è stata calcolata come
+\begin{equation}
+    \sigma_{l} = \frac{F.S}{5}*(\text{\#tacchette apprezzabili})
+\end{equation}
+dove in questo caso, in tutte le misure dell'esperimento, il numero di tacchette apprezzabili è stato 0.5. L'errore totale associato ad ogni misura di tensione con l'oscilloscopio è stato calcolato come
+
+\begin{equation}
+    \sigma_{V} = \sqrt{(\sigma_{l})^{2} + (\sigma_{c})^{2}}
+\end{equation}
+
+\noindent
+dove l'errore del costruttore è
+
+\begin{equation}
+    \frac{\sigma_{c}}{V_{mis}} = 3\%
+\end{equation} 
+
+\noindent
+con $V_{mis}$ tensione misurata; l'errore sullo zero dell'oscilloscopio è stato trascurato in quanto si è verificato che fosse trascurabile rispetto agli altri errori, grazie ad un opportuno fondo scala di $5$mV/Div. Invece, l'errore sulla misura di corrente è stato calcolato considerando l'errore del multimetro, che, per il fondo scala utilizzato per tutte le misure $F.S._{mult} = 60$mA, è dato da
+\begin{equation}
+    \frac{\sigma_{I}}{I_{mis}} = 1.5\% + 3 \text{ digits}
+\end{equation}
+
+Dalle caratteristiche di uscita del transistor per le due correnti di base riportate in \cref{fig:caratteristiche}, si sono eseguiti due fit lineari nella regione attiva del transistor (\err{scegli})
+\begin{equation}
+    I= a+bV
+\end{equation}
+
+\noindent
+per ottenere il valore della tensione di Early
+
+\begin{equation}
+    V_{A} = -\frac{a}{b}
+\end{equation}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{example-image}
+    \caption{Fit lineare delle caratteristiche di uscita del transistor per $I_{B} = 50 \mu A$ (\err{colore}) e per $I_{B} = 100 \mu A$ (\err{colore}). nella regione attiva (\err{scegli}).}
+    \label{fig:fit_calibrazione}
+\end{figure}
+Si può ottenere inoltre una stima (\err{senza incertezza}) del guadagno di corrente
+
+\begin{equation}
+    \beta = \frac{\Delta I_{C}}{\Delta I_{B}}
+\end{equation}
+
+\noindent
+dove $\Delta I_{C}$ è la differenza tra le correnti di collettore misurate per le due correnti di base, alla stessa tensione di collettore (nel nostro caso $V_{CE} = 3V$), e $\Delta I_{B}$ è la differenza tra le due correnti di base.
+
+
+
+
+
+\section*{Conclusioni}
+
+\appendix
+\section{Appendici}
+
+\end{document}
