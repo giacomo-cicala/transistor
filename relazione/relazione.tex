@@ -33,7 +33,7 @@
 \section*{Apparato sperimentale e svolgimento}
 
 \section*{Risultati e discussione}
-Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie di valori I-V rispettivamente per corrente di base di 50$\mu$A e 100$\mu$A. Per il calcolo degli errori associati alle misure di tensione e corrente si rimanda all'\cref{appendice:errori_I-V}.
+Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie di valori I-V rispettivamente per corrente di base di 50$\mu$A e 100$\mu$A. I valori di tensione e corrente sono già stati cambiati di segno per ottenere le caratteristiche nel primo quadrante Per il calcolo degli errori associati alle misure di tensione e corrente si rimanda all'\cref{appendice:errori_I-V}.
 
 \sisetup{
     table-number-alignment = center,
@@ -222,10 +222,17 @@ Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie
 
 \end{table}
 
-Dalle caratteristiche di uscita del transistor per le due correnti di base riportate in \cref{fig:fit_caratteristiche}, si sono eseguiti due fit lineari nella regione attiva del transistor (\err{scegli})
+Dalle caratteristiche di uscita del transistor per le due correnti di base riportate in (\cref{fig:fit_caratteristiche}), si sono eseguiti due fit lineari nella regione attiva del transistor (\err{scegli})
 \begin{equation}
     I_{C}= a+bV_{CE}
 \end{equation}
+
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{example-image}
+    \caption{Caratteristiche di uscita del transistor per le correnti di base $I_{B}=50 \mu A$ (in blu) e $I_{B}=100 \mu A$ (in rosso) con i relativi fit lineari nella regione attiva. Sulle ascisse sono riportate le tensioni collettore-emettitore, sulle ordinate le correnti di collettore.}
+    \label{fig:fit_caratteristiche}
+\end{figure}
 
 \noindent
 per ottenere il valore della tensione di Early
