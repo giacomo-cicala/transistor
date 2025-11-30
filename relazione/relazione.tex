@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{circuitikz}
+\usetikzlibrary{calc}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{amsfonts}
@@ -47,6 +48,61 @@ dove $\Delta I_{C}$ è la differenza tra le correnti di collettore misurate per 
 
 
 \section*{Apparato sperimentale e svolgimento}
+\begin{figure}
+    \centering
+    \begin{circuitikz}
+        % POWER RAILS
+        \draw (0,0.5) -- (0,10) node[above] {\textbf{GND}};
+        \draw (1,0.5) -- (1,10) node[above] {\textbf{-5V}};
+        
+        % TOP POTENTIOMETER
+        \draw (0,9) to[short, *-] ++(2,0) to [pR, name=pot_c] ++(0,-2) to[short, -*] ++(-1,0);
+
+        % TRANSISTOR (PNP)
+        \draw (4, 4.5) node[pnp, rotate=180, tr circle, anchor=center] (T) {};
+        \node[right] at (T.emitter) {E};
+        \node[above right] at (T.base) {B};
+        \node[right] at (T.collector) {C};
+        % Emitter
+        \draw (T.emitter) -- (0, 0 |- T.emitter) node[circ]{};
+        % Base
+        \draw (T.base) -- ++(1,0) coordinate (base);
+        % Collector
+        \draw (T.collector) -- (T.collector |- pot_c.wiper) -- (pot_c.wiper);
+
+        % BOTTOM POTENTIOMETER
+        \draw (0,3) to[short, *-] ++(2,0) to [pR, name=pot_b] ++(0,-2) to[short, -*] ++(-1,0);
+        \draw (base) to [rmeterwa, t=A, i=$i_b$] (pot_b.wiper -| base) -- (pot_b.wiper);
+    \end{circuitikz}
+    \qquad
+    \begin{circuitikz}
+        % POWER RAILS
+        \draw (0,0.5) -- (0,10) node[above] {\textbf{GND}};
+        \draw (1,0.5) -- (1,10) node[above] {\textbf{-5V}};
+        
+        % TOP POTENTIOMETER
+        \draw (0,9) to[short, *-] ++(2,0) to [pR, name=pot_c] ++(0,-2) to[short, -*] ++(-1,0);
+
+        % TRANSISTOR (PNP)
+        \draw (4, 4.5) node[pnp, rotate=180, tr circle, anchor=center] (T) {};
+        \node[right] at (T.emitter) {E};
+        \node[above right] at (T.base) {B};
+        \node[right] at (T.collector) {C};
+        % Emitter
+        \draw (T.emitter) -- (0, 0 |- T.emitter) node[circ]{};
+        % Base
+        \draw (T.base) -- ++(1,0) coordinate (base);
+        % Collector
+        \draw (T.collector) to [short, -*] ++(0,0.5) coordinate (collector) to [rmeterwa, t=A, i=$i_c$] (T.collector |- pot_c.wiper) -- (pot_c.wiper);
+        \draw (collector -| 0,0) to[short,*-] ++(1.5,0) coordinate (tmp) to [rmeterwa, t=V, v=$v_c$] (collector);
+
+        % BOTTOM POTENTIOMETER
+        \draw (0,3) to[short, *-] ++(2,0) to [pR, name=pot_b] ++(0,-2) to[short, -*] ++(-1,0);
+        \draw (pot_b.wiper) -- (pot_b.wiper -| base) -- (base);
+    \end{circuitikz}\\
+    \err{sistema verso tensione e corrente}
+\end{figure}
+
 
 \section*{Risultati e discussione}
 Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie di valori I-V rispettivamente per corrente di base di $-50$ \mu A e $-100$ \mu A. I valori di tensione e corrente sono già stati cambiati di segno per ottenere le caratteristiche nel primo quadrante Per il calcolo degli errori associati alle misure di tensione e corrente si rimanda all'\cref{appendice:errori_I-V}.
