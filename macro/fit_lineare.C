@@ -28,7 +28,7 @@ void analisi_bjt()
     // -----------------------------------------------------
     // 1. Impostazioni grafiche
     // -----------------------------------------------------
-    gStyle->SetOptFit(1111); // Mostra parametri fit, chi2, errori nel box
+    gStyle->SetOptFit(0); 
     gStyle->SetOptStat(0);   // Nascondi box statistica generica
 
     // -----------------------------------------------------
@@ -73,7 +73,7 @@ void analisi_bjt()
     // Fit lineare per |Vce| >= 1V.
     // BJT PNP: Vce negativa. Regione attiva approx da -4.5V a -1.0V.
     double fit_min = 1;
-    double fit_max = 4;
+    double fit_max = 3.5;
 
     // Fit espliciti del tipo a + b*x
     TF1 *f1 = new TF1("fit50", "[0] + [1]*x", fit_min, fit_max);
@@ -133,7 +133,7 @@ void analisi_bjt()
     // -----------------------------------------------------
     // 4. Creazione Canvas e TMultiGraph (tutti i dati in unico grafico)
     // -----------------------------------------------------
-    TCanvas *c1 = new TCanvas("c1", "Caratteristiche di Uscita BJT", 1000, 800);
+    TCanvas *c1 = new TCanvas("c1", "Caratteristiche di Uscita BJT", 800, 600);
     c1->cd();
     gPad->SetGrid();
 
@@ -142,7 +142,7 @@ void analisi_bjt()
     mg->Add(g50, "P");
     mg->Add(g100, "P");
     // mg->Add(g200, "P"); // COMMENTATO: 200 uA
-    mg->SetTitle("Caratteristiche di Uscita BJT P-N-P;V_{CE} (V);I_{C} (mA)");
+    mg->SetTitle("Caratteristiche di Uscita BJT P-N-P;-V_{CE} (V);-I_{C} (mA)");
     mg->Draw("A");
 
     // Ridisegniamo i grafici con marker e assicuriamoci che siano visibili
@@ -157,11 +157,21 @@ void analisi_bjt()
 
     // Legenda comune
     TLegend *leg = new TLegend(0.15, 0.70, 0.45, 0.88);
+    leg->SetTextFont(42);
     leg->AddEntry(g100, "Ib=100 #muA", "lep");
     // leg->AddEntry(g200, "Ib=200 #muA", "lep");
     leg->AddEntry(g50, "Ib=50 #muA", "lep");
     leg->Draw();
+     
+     if (gPad) {
+        mg->GetXaxis()->SetLimits(0, 4.5);
+        mg->SetMinimum(0);
+        mg->SetMaximum(22);
+        gPad->Modified();
+        gPad->Update();
+    }
 
+    c1->SaveAs("fit.eps");
     // -----------------------------------------------------
     // 5. Calcolo di Beta
     // -----------------------------------------------------
