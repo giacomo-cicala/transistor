@@ -68,66 +68,14 @@ void analisi_bjt()
     // g200->SetLineColor(kRed);
 
     // -----------------------------------------------------
-    // 3. Fitting (Regione Attiva)
+    // 3. Preparazione per fit V = a + b * I nel range di V
     // -----------------------------------------------------
-    // Fit lineare per |Vce| >= 1V.
-    // BJT PNP: Vce negativa. Regione attiva approx da -4.5V a -1.0V.
-    double fit_min = 1;
-    double fit_max = 3.5;
-
-    // Fit espliciti del tipo a + b*x
-    TF1 *f1 = new TF1("fit50", "[0] + [1]*x", fit_min, fit_max);
-    TF1 *f2 = new TF1("fit100", "[0] + [1]*x", fit_min, fit_max);
-    // TF1 *f3 = new TF1("fit200", "[0] + [1]*x", fit_min, fit_max); // COMMENTATO: 200 uA
-
-    f1->SetParNames("a", "b");
-    f2->SetParNames("a", "b");
-    // f3->SetParNames("a", "b");
-
-    // Imposta colori dei fit: f1 -> blu (50uA), f2 -> rosso (100uA)
-    f1->SetLineColor(kBlue);
-    f2->SetLineColor(kRed);
-    // f3->SetLineColor(kMagenta);
-
-    std::cout << "\n--- Risultati FIT Ib = 50 uA ---" << std::endl;
-    g50->Fit(f1, "R");
-    std::cout << "Parametri fit (50 uA): a = " << f1->GetParameter(0)
-              << " +/- " << f1->GetParError(0)
-              << ", b = " << f1->GetParameter(1)
-              << " +/- " << f1->GetParError(1) << std::endl;
-
-    std::cout << "\n--- Risultati FIT Ib = 100 uA ---" << std::endl;
-    g100->Fit(f2, "R");
-    std::cout << "Parametri fit (100 uA): a = " << f2->GetParameter(0)
-              << " +/- " << f2->GetParError(0)
-              << ", b = " << f2->GetParameter(1)
-              << " +/- " << f2->GetParError(1) << std::endl;
-
-    // Risultati per 200 uA commentati
-    // std::cout << "\n--- Risultati FIT Ib = 200 uA ---" << std::endl;
-    // g200->Fit(f3, "R");
-    // std::cout << "Parametri fit (200 uA): a = " << f3->GetParameter(0)
-    //           << " +/- " << f3->GetParError(0)
-    //           << ", b = " << f3->GetParameter(1)
-    //           << " +/- " << f3->GetParError(1) << std::endl;
-
-    //Evaluate Early terminal voltage (V_A) from slopes (CONTROLLA CHE SIA GIUSTO)
-    double VA_50 = -f1->GetParameter(0) / f1->GetParameter(1);
-    double VA_100 = -f2->GetParameter(0) / f2->GetParameter(1);
-    // double VA_200 = -f3->GetParameter(0) / f3->GetParameter(1); // COMMENTATO: 200 uA
-    
-    double err_VA_50 = VA_50 * TMath::Sqrt(TMath::Power(f1->GetParError(0) / f1->GetParameter(0), 2) +
-                                            TMath::Power(f1->GetParError(1) / f1->GetParameter(1), 2));
-    double err_VA_100 = VA_100 * TMath::Sqrt(TMath::Power(f2->GetParError(0) / f2->GetParameter(0), 2) +
-                                              TMath::Power(f2->GetParError(1) / f2->GetParameter(1), 2));
-    // double err_VA_200 = VA_200 * TMath::Sqrt(TMath::Power(f3->GetParError(0) / f3->GetParameter(0), 2) +
-    //                                           TMath::Power(f3->GetParError(1) / f3->GetParameter(1), 2));
-
-
-    std::cout << "\n--- Early Voltage (V_A) ---" << std::endl;
-    std::cout << "V_A (50 uA): " << VA_50 << " +/- " << err_VA_50 << std::endl;
-    std::cout << "V_A (100 uA): " << VA_100 << " +/- " << err_VA_100 << std::endl;
-    // std::cout << "V_A (200 uA): " << VA_200 << " +/- " << err_VA_200 << std::endl;
+    // Non eseguiamo qui il fit Ic(V); l'utente desidera solo i punti sul grafico.
+    // Eseguiremo invece un fit con ascissa = I_c e ordinata = V_ce per estrarre
+    // la tensione di Early (a) e la conduttanza (1/b) selezionando i punti
+    // con V_ce in [fitV_min, fitV_max].
+    double fitV_min = 1.0;
+    double fitV_max = 3.5;
     
 
     // -----------------------------------------------------
@@ -150,10 +98,7 @@ void analisi_bjt()
     g100->Draw("P same");
     // g200->Draw("P same");
 
-    // Disegniamo i fit sopra i dati
-    f1->Draw("same");
-    f2->Draw("same");
-    // f3->Draw("same");
+    // Non disegnare i fit sopra i dati (l'utente vuole solo i punti)
 
     // Legenda comune
     TLegend *leg = new TLegend(0.15, 0.70, 0.45, 0.88);
@@ -162,45 +107,75 @@ void analisi_bjt()
     // leg->AddEntry(g200, "Ib=200 #muA", "lep");
     leg->AddEntry(g50, "Ib=50 #muA", "lep");
     leg->Draw();
-     
-     if (gPad) {
+
+    // Eseguiamo i fit V = a + b*I sui dati (asse scambiati) nel range di V richiesto
+    std::cout << "\n--- Fit V = a + b*I (range V = " << fitV_min << " - " << fitV_max << " V) ---" << std::endl;
+
+    TF1 *fitVI = new TF1("fitVI", "[0] + [1]*x", 0, 1); // range settato dinamicamente
+
+    auto processDataset = [&](TGraphErrors *g, const char *label){
+        int n = g->GetN();
+        double xv, yv, exv, eyv;
+        TGraphErrors *g_inv = new TGraphErrors(); // x' = I (mA), y' = V (V)
+        int ip = 0;
+        double minI = 1e12, maxI = -1e12;
+        for (int i = 0; i < n; ++i){
+            g->GetPoint(i, xv, yv);
+            exv = g->GetErrorX(i);
+            eyv = g->GetErrorY(i);
+            // xv is V (original x), yv is I (original y)
+            if (xv >= fitV_min && xv <= fitV_max){
+                // swapped: x' = I, y' = V
+                g_inv->SetPoint(ip, yv, xv);
+                g_inv->SetPointError(ip, eyv, exv);
+                if (yv < minI) minI = yv;
+                if (yv > maxI) maxI = yv;
+                ++ip;
+            }
+        }
+
+        if (ip < 2){
+            std::cout << "Dataset " << label << ": non ci sono punti sufficienti nel range V=["<<fitV_min<<","<<fitV_max<<"] V per eseguire il fit." << std::endl;
+            return;
+        }
+
+        fitVI->SetRange(minI, maxI);
+        fitVI->SetParameters(0.0, 1.0);
+        g_inv->Fit(fitVI, "RQ"); // Range, Quiet
+
+        double a = fitVI->GetParameter(0);
+        double err_a = fitVI->GetParError(0);
+        double b = fitVI->GetParameter(1);
+        double err_b = fitVI->GetParError(1);
+        // Stampa dei parametri di fit con errori
+        std::cout << "Dataset " << label << ": fit V = a + b*I -> a = " << a << " +/- " << err_a << " V, b = " << b << " +/- " << err_b << " V/(mA)" << std::endl;
+
+        // Early voltage: V_A = a
+        double V_A = a;
+        double err_V_A = err_a;
+
+        // Conduttanza g = dI/dV = 1/b (I in mA, V in V -> g in mA/V)
+        double cond_mA_per_V = 1.0 / b;
+        double err_cond_mA_per_V = err_b / (b*b);
+
+        // Converti in Siemens: 1 mA/V = 1e-3 A/V = 1e-3 S
+        double cond_S = cond_mA_per_V * 1e-3;
+        double err_cond_S = err_cond_mA_per_V * 1e-3;
+
+        std::cout << "Dataset " << label << ": V_A = " << V_A << " +/- " << err_V_A << " V" << std::endl;
+        std::cout << "Dataset " << label << ": conduttanza = " << cond_mA_per_V << " +/- " << err_cond_mA_per_V << " (mA/V) = " << cond_S << " +/- " << err_cond_S << " S" << std::endl;
+    };
+
+    processDataset(g50, "50 uA");
+    processDataset(g100, "100 uA");
+
+   
+
+    if (gPad) {
         mg->GetXaxis()->SetLimits(0, 4.5);
         mg->SetMinimum(0);
         mg->SetMaximum(22);
         gPad->Modified();
         gPad->Update();
     }
-
-    c1->SaveAs("fit.eps");
-    // -----------------------------------------------------
-    // 5. Calcolo di Beta
-    // -----------------------------------------------------
-    // Beta = Delta_Ic / Delta_Ib calcolato dai fit a V_target
-
-    double V_target = -3.0; // Volts
-
-    // Valutiamo la Ic dalle funzioni di fit
-    double Ic_50_val = f1->Eval(V_target);
-    double Ic_100_val = f2->Eval(V_target);
-
-    // Correnti di base (mA)
-    double Ib_50 = 0.05; // 50 uA
-    double Ib_100 = 0.1; // 100 uA
-    double delta_Ib = Ib_100 - Ib_50;
-
-    double delta_Ic = Ic_100_val - Ic_50_val;
-    // Beta è positivo
-    double beta = std::abs(delta_Ic) / delta_Ib;
-
-    std::cout << "\n=============================================" << std::endl;
-    std::cout << " CALCOLO BETA (Guadagno di corrente) a Vce = " << V_target << " V" << std::endl;
-    std::cout << "=============================================" << std::endl;
-    std::cout << "Ic (fit) @ 100uA: " << Ic_100_val << " mA" << std::endl;
-    std::cout << "Ic (fit) @ 50uA: " << Ic_50_val << " mA" << std::endl;
-    std::cout << "Delta Ic:         " << std::abs(delta_Ic) << " mA" << std::endl;
-    std::cout << "Delta Ib:         " << delta_Ib << " mA" << std::endl;
-    std::cout << "---------------------------------------------" << std::endl;
-    std::cout << "BETA = " << beta << std::endl;
-    std::cout << "=============================================" << std::endl;
-
 }

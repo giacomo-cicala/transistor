@@ -148,186 +148,186 @@ Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie
 }
 
 \begin{table}[hbtp]
-	\centering
-	% --- INIZIO PRIMA META' (SINISTRA) ---
-	\begin{minipage}[t]{0.48\textwidth}
-		\vspace{0pt}
-		\centering
-		\begin{tabular}[t]{
-				S[table-format=1.3]
-				S[table-format=2.2]
-				S[table-format=1.3]
-				S[table-format=1.2]
-				S[table-format=1.1]
-			}
-			\toprule
-			{ \boldmath $-V_{CE}$ } & { \boldmath $-I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
-			{ (V) }                 & { (mA) }               & { (V) }                    & { (mA) }                   & { (V/div) }                \\
-			\midrule
-			4.00                    & 10.97                  & 0.16                       & 0.05                       & 1                          \\
-			3.80                    & 10.92                  & 0.15                       & 0.05                       & 1                          \\
-			3.60                    & 10.86                  & 0.15                       & 0.05                       & 1                          \\
-			3.40                    & 10.80                  & 0.14                       & 0.05                       & 1                          \\
-			3.20                    & 10.73                  & 0.14                       & 0.05                       & 1                          \\
-			3.00                    & 10.62                  & 0.10                       & 0.05                       & 0.5                        \\
-			2.80                    & 10.53                  & 0.10                       & 0.05                       & 0.5                        \\
-			2.60                    & 10.46                  & 0.09                       & 0.05                       & 0.5                        \\
-			2.40                    & 10.39                  & 0.09                       & 0.05                       & 0.5                        \\
-			2.20                    & 10.32                  & 0.08                       & 0.05                       & 0.5                        \\
-			2.00                    & 10.24                  & 0.08                       & 0.05                       & 0.5                        \\
-			1.80                    & 10.14                  & 0.07                       & 0.05                       & 0.5                        \\
-			1.60                    & 10.05                  & 0.07                       & 0.05                       & 0.5                        \\
-			1.40                    & 9.97                   & 0.07                       & 0.04                       & 0.5                        \\
-			1.20                    & 9.86                   & 0.06                       & 0.04                       & 0.5                        \\
-			\bottomrule
-		\end{tabular}
-	\end{minipage}
-	\hfill % Questo comando spinge le due minipage ai lati opposti
-	% --- INIZIO SECONDA META' (DESTRA) ---
-	\begin{minipage}[t]{0.48\textwidth}
-		\centering
-		% NOTA: Intestazioni ripetute qui per chiarezza
-		\begin{tabular}[t]{
-				S[table-format=1.3]
-				S[table-format=2.2]
-				S[table-format=1.3]
-				S[table-format=1.2]
-				S[table-format=1.1]
-			}
-			\toprule
-			{ \boldmath $-V_{CE}$ } & { \boldmath $-I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
-			{ (V) }                 & { (mA) }               & { (V) }                    & { (mA) }                   & { (V/div) }                \\
-			\midrule
-			1.00                    & 9.75                   & 0.04                       & 0.04                       & 0.2                        \\
-			0.80                    & 9.62                   & 0.03                       & 0.04                       & 0.2                        \\
-			0.60                    & 9.49                   & 0.03                       & 0.04                       & 0.2                        \\
-			0.52                    & 9.41                   & 0.03                       & 0.04                       & 0.2                        \\
-			0.44                    & 9.34                   & 0.02                       & 0.04                       & 0.2                        \\
-			0.400                   & 9.27                   & 0.016                      & 0.04                       & 0.1                        \\
-			0.360                   & 9.22                   & 0.015                      & 0.04                       & 0.1                        \\
-			0.320                   & 9.15                   & 0.014                      & 0.04                       & 0.1                        \\
-			0.280                   & 8.99                   & 0.013                      & 0.04                       & 0.1                        \\
-			0.240                   & 8.63                   & 0.012                      & 0.04                       & 0.1                        \\
-			0.200                   & 7.77                   & 0.012                      & 0.04                       & 0.1                        \\
-			0.180                   & 7.08                   & 0.011                      & 0.04                       & 0.1                        \\
-			0.160                   & 5.97                   & 0.011                      & 0.04                       & 0.1                        \\
-			0.140                   & 4.81                   & 0.011                      & 0.04                       & 0.1                        \\
-			\bottomrule
-		\end{tabular}
-	\end{minipage}
+    \centering
+    % --- INIZIO PRIMA META' (SINISTRA) ---
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+        \centering
+        \begin{tabular}[t]{
+                S[table-format=1.3]
+                S[table-format=2.2]
+                S[table-format=1.3]
+                S[table-format=1.2] % Errore corrente: 2 decimali
+                S[table-format=1.1]
+            }
+            \toprule
+            { \boldmath $-V_{CE}$ } & { \boldmath $-I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
+            { (V) }                 & { (mA) }               & { (V) }                    & { (mA) }                   & { (V/div) }                \\
+            \midrule
+            4.00                    & 10.97                  & 0.16                       & 0.14                       & 1                          \\
+            3.80                    & 10.92                  & 0.15                       & 0.14                       & 1                          \\
+            3.60                    & 10.86                  & 0.15                       & 0.14                       & 1                          \\
+            3.40                    & 10.80                  & 0.14                       & 0.14                       & 1                          \\
+            3.20                    & 10.73                  & 0.14                       & 0.14                       & 1                          \\
+            3.00                    & 10.62                  & 0.10                       & 0.14                       & 0.5                        \\
+            2.80                    & 10.53                  & 0.10                       & 0.14                       & 0.5                        \\
+            2.60                    & 10.46                  & 0.09                       & 0.14                       & 0.5                        \\
+            2.40                    & 10.39                  & 0.09                       & 0.13                       & 0.5                        \\
+            2.20                    & 10.32                  & 0.08                       & 0.13                       & 0.5                        \\
+            2.00                    & 10.24                  & 0.08                       & 0.13                       & 0.5                        \\
+            1.80                    & 10.14                  & 0.07                       & 0.13                       & 0.5                        \\
+            1.60                    & 10.05                  & 0.07                       & 0.13                       & 0.5                        \\
+            1.40                    & 9.97                   & 0.07                       & 0.13                       & 0.5                        \\
+            1.20                    & 9.86                   & 0.06                       & 0.13                       & 0.5                        \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    % --- INIZIO SECONDA META' (DESTRA) ---
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+        \centering
+        \begin{tabular}[t]{
+                S[table-format=1.3]
+                S[table-format=2.2]
+                S[table-format=1.3]
+                S[table-format=1.2] % Errore corrente: 2 decimali
+                S[table-format=1.1]
+            }
+            \toprule
+            { \boldmath $-V_{CE}$ } & { \boldmath $-I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
+            { (V) }                 & { (mA) }               & { (V) }                    & { (mA) }                   & { (V/div) }                \\
+            \midrule
+            1.00                    & 9.75                   & 0.04                       & 0.13                       & 0.2                        \\
+            0.80                    & 9.62                   & 0.03                       & 0.13                       & 0.2                        \\
+            0.60                    & 9.49                   & 0.03                       & 0.13                       & 0.2                        \\
+            0.52                    & 9.41                   & 0.03                       & 0.12                       & 0.2                        \\
+            0.44                    & 9.34                   & 0.02                       & 0.12                       & 0.2                        \\
+            0.400                   & 9.27                   & 0.016                      & 0.12                       & 0.1                        \\
+            0.360                   & 9.22                   & 0.015                      & 0.12                       & 0.1                        \\
+            0.320                   & 9.15                   & 0.014                      & 0.12                       & 0.1                        \\
+            0.280                   & 8.99                   & 0.013                      & 0.12                       & 0.1                        \\
+            0.240                   & 8.63                   & 0.012                      & 0.12                       & 0.1                        \\
+            0.200                   & 7.77                   & 0.012                      & 0.11                       & 0.1                        \\
+            0.180                   & 7.08                   & 0.011                      & 0.10                       & 0.1                        \\
+            0.160                   & 5.97                   & 0.011                      & 0.09                       & 0.1                        \\
+            0.140                   & 4.81                   & 0.011                      & 0.08                       & 0.1                        \\
+            \\ % Riga vuota per pareggiare la lunghezza
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
 	\caption{Misure di tensione e corrente per $I_{B} = -50 \mu A$. La prima colonna riporta le tensioni collettore-emettitore, la seconda le correnti di collettore, la terza gli errori sulla misure di tensione, la quarta gli errori sulle misure di corrente, la quinta il fondo scala dell'oscilloscopio.}
+    \label{tab:50uA}
 
-	\label{tab:50uA}
 \end{table}
 
 \begin{table}[h]
-	\centering
-	% --- META' SINISTRA (Righe 1-32) ---
-	\begin{minipage}[t]{0.48\textwidth}
-		\vspace{0pt} % Trucco per allineamento
-		\centering
-		\begin{tabular}[t]{
-				S[table-format=1.3] % V_CE
-				S[table-format=2.2] % I_C (serve 2.2 per il 20.xx)
-				S[table-format=1.3] % err V (serve 1.3 per i 0.00x)
-				S[table-format=1.2] % err I
-				S[table-format=1.1] % F.S.
-			}
-			\toprule
-			{ \boldmath $-V_{CE}$ } & { \boldmath $-I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
-			{ (V) }                 & { (mA) }               & { (V) }                    & { (mA) }                   & { (V/div) }                \\
-			\midrule
-			4.00                    & 20.68                  & 0.16                       & 0.06                       & 1                          \\
-			3.80                    & 20.65                  & 0.15                       & 0.06                       & 1                          \\
-			3.60                    & 20.56                  & 0.15                       & 0.06                       & 1                          \\
-			3.40                    & 20.44                  & 0.14                       & 0.06                       & 1                          \\
-			3.20                    & 20.31                  & 0.14                       & 0.06                       & 1                          \\
-			3.00                    & 20.15                  & 0.13                       & 0.06                       & 1                          \\
-			2.90                    & 19.89                  & 0.10                       & 0.06                       & 0.5                        \\
-			2.80                    & 19.81                  & 0.10                       & 0.06                       & 0.5                        \\
-			2.70                    & 19.70                  & 0.10                       & 0.06                       & 0.5                        \\
-			2.60                    & 19.61                  & 0.09                       & 0.06                       & 0.5                        \\
-			2.50                    & 19.54                  & 0.09                       & 0.06                       & 0.5                        \\
-			2.40                    & 19.44                  & 0.09                       & 0.06                       & 0.5                        \\
-			2.30                    & 19.32                  & 0.09                       & 0.06                       & 0.5                        \\
-			2.20                    & 19.21                  & 0.08                       & 0.06                       & 0.5                        \\
-			2.10                    & 19.12                  & 0.08                       & 0.06                       & 0.5                        \\
-			2.00                    & 19.02                  & 0.08                       & 0.06                       & 0.5                        \\
-			1.90                    & 18.88                  & 0.08                       & 0.06                       & 0.5                        \\
-			1.80                    & 18.80                  & 0.07                       & 0.06                       & 0.5                        \\
-			1.70                    & 18.70                  & 0.07                       & 0.06                       & 0.5                        \\
-			1.60                    & 18.61                  & 0.07                       & 0.06                       & 0.5                        \\
-			1.50                    & 18.48                  & 0.07                       & 0.06                       & 0.5                        \\
-			1.40                    & 18.38                  & 0.07                       & 0.06                       & 0.5                        \\
-			1.30                    & 18.26                  & 0.06                       & 0.06                       & 0.5                        \\
-			1.20                    & 18.17                  & 0.06                       & 0.06                       & 0.5                        \\
-			1.10                    & 18.04                  & 0.06                       & 0.06                       & 0.5                        \\
-			1.00                    & 17.91                  & 0.04                       & 0.06                       & 0.2                        \\
-			0.92                    & 17.82                  & 0.03                       & 0.06                       & 0.2                        \\
-			0.84                    & 17.70                  & 0.03                       & 0.06                       & 0.2                        \\
-			0.76                    & 17.60                  & 0.03                       & 0.06                       & 0.2                        \\
-			0.68                    & 17.47                  & 0.03                       & 0.06                       & 0.2                        \\
-			0.60                    & 17.31                  & 0.03                       & 0.06                       & 0.2                        \\
-			0.52                    & 17.11                  & 0.03                       & 0.06                       & 0.2                        \\
-			\bottomrule
-		\end{tabular}
-	\end{minipage}
-	\hfill
-	% --- META' DESTRA (Righe 33-64) ---
-	\begin{minipage}[t]{0.48\textwidth}
-		\vspace{0pt} % Trucco per allineamento
-		\centering
-		\begin{tabular}[t]{
-				S[table-format=1.3]
-				S[table-format=2.2]
-				S[table-format=1.3]
-				S[table-format=1.2]
-				S[table-format=1.1]
-			}
-			\toprule
-			{ \boldmath $-V_{CE}$ } & { \boldmath $-I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
-			{ (V) }                 & { (mA) }               & { (V) }                    & { (mA) }                   & { (V/div) }                \\
-			\midrule
-			0.44                    & 16.80                  & 0.02                       & 0.06                       & 0.2                        \\
-			0.40                    & 16.61                  & 0.02                       & 0.05                       & 0.2                        \\
-			0.380                   & 16.10                  & 0.015                      & 0.05                       & 0.1                        \\
-			0.340                   & 15.85                  & 0.014                      & 0.05                       & 0.1                        \\
-			0.320                   & 15.60                  & 0.014                      & 0.05                       & 0.1                        \\
-			0.300                   & 15.28                  & 0.013                      & 0.05                       & 0.1                        \\
-			0.290                   & 15.05                  & 0.010                      & 0.05                       & 0.05                       \\
-			0.280                   & 14.85                  & 0.010                      & 0.05                       & 0.05                       \\
-			0.270                   & 14.60                  & 0.010                      & 0.05                       & 0.05                       \\
-			0.260                   & 14.35                  & 0.009                      & 0.05                       & 0.05                       \\
-			0.250                   & 14.04                  & 0.009                      & 0.05                       & 0.05                       \\
-			0.240                   & 13.65                  & 0.009                      & 0.05                       & 0.05                       \\
-			0.230                   & 13.27                  & 0.009                      & 0.05                       & 0.05                       \\
-			0.220                   & 12.80                  & 0.008                      & 0.05                       & 0.05                       \\
-			0.210                   & 12.30                  & 0.008                      & 0.05                       & 0.05                       \\
-			0.200                   & 11.70                  & 0.008                      & 0.05                       & 0.05                       \\
-			0.190                   & 11.07                  & 0.008                      & 0.05                       & 0.05                       \\
-			0.180                   & 10.30                  & 0.007                      & 0.05                       & 0.05                       \\
-			0.170                   & 9.49                   & 0.007                      & 0.04                       & 0.05                       \\
-			0.160                   & 8.62                   & 0.007                      & 0.04                       & 0.05                       \\
-			0.150                   & 7.75                   & 0.007                      & 0.04                       & 0.05                       \\
-			0.140                   & 6.75                   & 0.007                      & 0.04                       & 0.05                       \\
-			0.130                   & 5.76                   & 0.006                      & 0.04                       & 0.05                       \\
-			0.120                   & 4.87                   & 0.006                      & 0.04                       & 0.05                       \\
-			0.110                   & 4.07                   & 0.006                      & 0.04                       & 0.05                       \\
-			0.100                   & 3.27                   & 0.004                      & 0.03                       & 0.02                       \\
-			0.092                   & 2.68                   & 0.003                      & 0.03                       & 0.02                       \\
-			0.084                   & 2.13                   & 0.003                      & 0.03                       & 0.02                       \\
-			0.076                   & 1.68                   & 0.003                      & 0.03                       & 0.02                       \\
-			0.068                   & 1.29                   & 0.003                      & 0.03                       & 0.02                       \\
-			0.060                   & 0.96                   & 0.003                      & 0.03                       & 0.02                       \\
-			\\
-			\bottomrule
-		\end{tabular}
-	\end{minipage}
+    \centering
+    % --- META' SINISTRA (Righe 1-32) ---
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+        \centering
+        \begin{tabular}[t]{
+                S[table-format=1.3]
+                S[table-format=2.1] % Tutte arrotondate a 1 decimale per coerenza con l'errore 0.2
+                S[table-format=1.3]
+                S[table-format=1.1] % Errore fisso a 0.2
+                S[table-format=1.1]
+            }
+            \toprule
+            { \boldmath $-V_{CE}$ } & { \boldmath $-I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
+            { (V) }                 & { (mA) }               & { (V) }                    & { (mA) }                   & { (V/div) }                \\
+            \midrule
+            4.00                    & 20.7                   & 0.16                       & 0.2                        & 1                          \\
+            3.80                    & 20.7                   & 0.15                       & 0.2                        & 1                          \\
+            3.60                    & 20.6                   & 0.15                       & 0.2                        & 1                          \\
+            3.40                    & 20.4                   & 0.14                       & 0.2                        & 1                          \\
+            3.20                    & 20.3                   & 0.14                       & 0.2                        & 1                          \\
+            3.00                    & 20.2                   & 0.13                       & 0.2                        & 1                          \\
+            2.90                    & 19.9                   & 0.10                       & 0.2                        & 0.5                        \\
+            2.80                    & 19.8                   & 0.10                       & 0.2                        & 0.5                        \\
+            2.70                    & 19.7                   & 0.10                       & 0.2                        & 0.5                        \\
+            2.60                    & 19.6                   & 0.09                       & 0.2                        & 0.5                        \\
+            2.50                    & 19.5                   & 0.09                       & 0.2                        & 0.5                        \\
+            2.40                    & 19.4                   & 0.09                       & 0.2                        & 0.5                        \\
+            2.30                    & 19.3                   & 0.09                       & 0.2                        & 0.5                        \\
+            2.20                    & 19.2                   & 0.08                       & 0.2                        & 0.5                        \\
+            2.10                    & 19.1                   & 0.08                       & 0.2                        & 0.5                        \\
+            2.00                    & 19.0                   & 0.08                       & 0.2                        & 0.5                        \\
+            1.90                    & 18.9                   & 0.08                       & 0.2                        & 0.5                        \\
+            1.80                    & 18.8                   & 0.07                       & 0.2                        & 0.5                        \\
+            1.70                    & 18.7                   & 0.07                       & 0.2                        & 0.5                        \\
+            1.60                    & 18.6                   & 0.07                       & 0.2                        & 0.5                        \\
+            1.50                    & 18.5                   & 0.07                       & 0.2                        & 0.5                        \\
+            1.40                    & 18.4                   & 0.07                       & 0.2                        & 0.5                        \\
+            1.30                    & 18.3                   & 0.06                       & 0.2                        & 0.5                        \\
+            1.20                    & 18.2                   & 0.06                       & 0.2                        & 0.5                        \\
+            1.10                    & 18.0                   & 0.06                       & 0.2                        & 0.5                        \\
+            1.00                    & 17.9                   & 0.04                       & 0.2                        & 0.2                        \\
+            0.92                    & 17.8                   & 0.03                       & 0.2                        & 0.2                        \\
+            0.84                    & 17.7                   & 0.03                       & 0.2                        & 0.2                        \\
+            0.76                    & 17.6                   & 0.03                       & 0.2                        & 0.2                        \\
+            0.68                    & 17.5                   & 0.03                       & 0.2                        & 0.2                        \\
+            0.60                    & 17.3                   & 0.03                       & 0.2                        & 0.2                        \\
+            0.52                    & 17.1                   & 0.03                       & 0.2                        & 0.2                        \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    % --- META' DESTRA (Righe 33-64) ---
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+        \centering
+        \begin{tabular}[t]{
+                S[table-format=1.3]
+                S[table-format=2.2] % Misto: 2 decimali tranne una riga
+                S[table-format=1.3]
+                S[table-format=1.2] % Misto: 2 decimali tranne una riga
+                S[table-format=1.1]
+            }
+            \toprule
+            { \boldmath $-V_{CE}$ } & { \boldmath $-I_{C}$ } & { \boldmath $\sigma_{V}$ } & { \boldmath $\sigma_{I}$ } & { \boldmath $F.S._{osc}$ } \\
+            { (V) }                 & { (mA) }               & { (V) }                    & { (mA) }                   & { (V/div) }                \\
+            \midrule
+            0.44                    & 16.8                  & 0.02                       & 0.2                       & 0.2                        \\
+            0.40                    & 16.6                  & 0.02                       & 0.2                       & 0.2                        \\
+            0.380                   & 16.10                  & 0.015                      & 0.19                       & 0.1                        \\
+            0.340                   & 15.85                  & 0.014                      & 0.19                       & 0.1                        \\
+            0.320                   & 15.60                  & 0.014                      & 0.19                       & 0.1                        \\
+            0.300                   & 15.28                  & 0.013                      & 0.19                       & 0.1                        \\
+            0.290                   & 15.05                  & 0.010                      & 0.19                       & 0.05                       \\
+            0.280                   & 14.85                  & 0.010                      & 0.18                       & 0.05                       \\
+            0.270                   & 14.60                  & 0.010                      & 0.18                       & 0.05                       \\
+            0.260                   & 14.35                  & 0.009                      & 0.18                       & 0.05                       \\
+            0.250                   & 14.04                  & 0.009                      & 0.18                       & 0.05                       \\
+            0.240                   & 13.65                  & 0.009                      & 0.17                       & 0.05                       \\
+            0.230                   & 13.27                  & 0.009                      & 0.17                       & 0.05                       \\
+            0.220                   & 12.80                  & 0.008                      & 0.17                       & 0.05                       \\
+            0.210                   & 12.30                  & 0.008                      & 0.17                       & 0.05                       \\
+            0.200                   & 11.70                  & 0.008                      & 0.16                       & 0.05                       \\
+            0.190                   & 11.07                  & 0.008                      & 0.16                       & 0.05                       \\
+            0.180                   & 10.30                  & 0.007                      & 0.15                       & 0.05                       \\
+            0.170                   & 9.49                   & 0.007                      & 0.15                       & 0.05                       \\
+            0.160                   & 8.62                   & 0.007                      & 0.14                       & 0.05                       \\
+            0.150                   & 7.75                   & 0.007                      & 0.14                       & 0.05                       \\
+            0.140                   & 6.75                    & 0.007                      & 0.10                        & 0.05                       \\ 
+            0.130                   & 5.76                   & 0.006                      & 0.09                       & 0.05                       \\
+            0.120                   & 4.87                   & 0.006                      & 0.08                       & 0.05                       \\
+            0.110                   & 4.07                   & 0.006                      & 0.07                       & 0.05                       \\
+            0.100                   & 3.27                   & 0.004                      & 0.06                       & 0.02                       \\
+            0.092                   & 2.68                   & 0.003                      & 0.06                       & 0.02                       \\
+            0.084                   & 2.13                   & 0.003                      & 0.05                       & 0.02                       \\
+            0.076                   & 1.68                   & 0.003                      & 0.05                       & 0.02                       \\
+            0.068                   & 1.29                   & 0.003                      & 0.04                       & 0.02                       \\
+            0.060                   & 0.96                   & 0.003                      & 0.04                       & 0.02                       \\
+            \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
 	\caption{Misure di tensione e corrente per $I_{B} = -100 \mu A$. La prima colonna riporta le tensioni collettore-emettitore, la seconda le correnti di collettore, la terza gli errori sulla misure di tensione, la quarta gli errori sulle misure di corrente, la quinta il fondo scala dell'oscilloscopio.}
-	\label{tab:100uA}
+    \label{tab:100uA}
 
 \end{table}
-
 Dalle caratteristiche di uscita del transistor per le due correnti di base
 riportate in (\cref{fig:fit_caratteristiche}), si sono eseguiti due fit lineari
 nella regione attiva del transistor $(1-3.5)$ V per ottenere il valore della
