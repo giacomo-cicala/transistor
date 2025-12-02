@@ -103,9 +103,9 @@ void analisi_bjt()
     // Legenda comune
     TLegend *leg = new TLegend(0.15, 0.70, 0.45, 0.88);
     leg->SetTextFont(42);
-    leg->AddEntry(g100, "Ib=100 #muA", "lep");
+    leg->AddEntry(g100, "Ib=-100 #muA", "lep");
     // leg->AddEntry(g200, "Ib=200 #muA", "lep");
-    leg->AddEntry(g50, "Ib=50 #muA", "lep");
+    leg->AddEntry(g50, "Ib=-50 #muA", "lep");
     leg->Draw();
 
     // Eseguiamo i fit V = a + b*I sui dati (asse scambiati) nel range di V richiesto

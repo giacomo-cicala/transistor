@@ -46,17 +46,18 @@ Data la caratteristica I-V del collettore con corrente di base fissata, nella
 regione attiva ci si aspetta un andamento lineare. Estendendo questa retta
 verso l'asse delle tensioni si avrà un intersezione nel punto $V_a$, detto
 tensione di Early. Scrivendo la retta come:
-\[
-	V_{} = a + b I_{}
-\]
+\begin{equation}
+    \label{eq:VA}
+   V _{CE} = a + b I_{C}
+\end{equation}
 La tensione di Early non è altro che l'ordinata all'origine, $V_a = a$. Il
 parametro $b$ invece rappresenta la resistenza del ramo del collettore con
 $I_b$ fissato (\err{nome specifico?}). La conduttanza, definita come:
-\[
-	g = \frac{\Delta I_C}{\Delta V_{CE}}
-\]
+\begin{equation}
+    \label{eq:conduttanza}
+    g = \frac{\Delta I_C}{\Delta V_{CE}}
+\end{equation}
 sarà il reciproco di $b$.
-
 Variando la corrente di base e misurando nuovamente la corrente del collettore
 alla stessa tensione, si può ottenere una stima del guadagno di corrente:
 \begin{equation}
@@ -139,7 +140,8 @@ I componenti scelti sono:
 Come prima cosa è stata impostata la corrente di base, v
 
 \section*{Risultati e discussione}
-Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie di valori I-V rispettivamente per corrente di base di $-50$ \mu A e $-100$ \mu A. I valori di tensione e corrente sono già stati cambiati di segno per ottenere le caratteristiche nel primo quadrante Per il calcolo degli errori associati alle misure di tensione e corrente si rimanda all'\cref{appendice:errori_I-V}.
+Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie di valori I-V rispettivamente per corrente di base di $-50$ \mu A e $-100$ \mu A. I valori di tensione e corrente sono già stati cambiati di segno per ottenere le caratteristiche nel primo quadrante Per il calcolo degli errori associati alle misure di tensione e corrente si rimanda all'\cref{appendice:errori_I-V}. Le caratteristiche di uscita del transistor per le due correnti di base
+considerate sono riportate in (\cref{fig:caratteristiche}). 
 
 \sisetup{
 	table-number-alignment = center,
@@ -328,43 +330,39 @@ Si riportano in (\cref{tab:50uA}) e in (\cref{tab:100uA}) le misure delle coppie
     \label{tab:100uA}
 
 \end{table}
-Dalle caratteristiche di uscita del transistor per le due correnti di base
-riportate in (\cref{fig:fit_caratteristiche}), si sono eseguiti due fit lineari
-nella regione attiva del transistor $(1-3.5)$ V per ottenere il valore della
-tensione di Early.
-\begin{equation}
-	I_{C}= a+bV_{CE}
-\end{equation}
+
 
 \begin{figure}[hbtp]
 	\centering
-	\includegraphics[width=0.7\textwidth]{fit.pdf}
+	\includegraphics[width=0.7\textwidth]{caratteristiche.pdf}
 	\caption{Caratteristiche di uscita del transistor per le correnti di base $I_{B}=-50$ \mu A (in blu) e $I_{B}=-100$ \mu A (in rosso) con i relativi fit lineari nella regione attiva $(1-3.5)$ V. Sulle ascisse sono riportate le tensioni collettore-emettitore, sulle ordinate le correnti di collettore.}
-	\label{fig:fit_caratteristiche}
+	\label{fig:caratteristiche}
 \end{figure}
 
-\noindent
-I valori dei parametri di fit per le due correnti di base sono i seguenti:
+Per ottenere delle stime per la tensione di Early e per la conduttanza,  si sono eseguiti dei fit lineari come in \cref{eq:VA} nella regione attiva del transistor, compresa tra $1$ V e $3.5$ V. I valori dei parametri di fit ottenuti per le due correnti di base sono
+
 \begin{equation*}
-	a_{50} = (9.35 \pm 0.05) \text{ mV} \hspace{2cm} b_{50} = (0.43 \pm 0.02) \text{ mS}
+	a_{50} = (22 \pm 3) \text{ V} \hspace{2cm} b_{50} = (2.3 \pm 0.3) \text{ k\Omega}
 \end{equation*}
 \begin{equation*}
-	a_{100} = (16.89 \pm 0.07) \text{ mV} \hspace{2cm} b_{100} = (1.06 \pm 0.03) \text{ mS}
+	a_{100} = (16.0 \pm 1.3) \text{ V} \hspace{2cm} b_{100} = (0.95 \pm 0.07) \text{ k\Omega}
+\end{equation*}
+Dunque, per le considerazioni già fatte, abbiamo che le due stime per la tensione di Early e per la conduttanza sono
+
+\begin{equation*}
+	V_{a,50} = (22 \pm 3) \text{ V} \hspace{2cm} V_{a,100} = (16.0 \pm 1.3) \text{ V}
+\end{equation*}
+\begin{equation*}
+    g_{50} = (0.43 \pm 0.05) \text{ mS} \hspace{2cm} g_{100} = (1.05 \pm 0.07) \text{ mS}
 \end{equation*}
 
 \noindent
-da cui, tramite \cref{eq:VA}, si ottengono i valori di tensione di Early
-\begin{equation*}
-	V_{A,50} = (-21.7 \pm 1.1) \text{ V} \hspace{2cm} V_{A,100} = (-16.0 \pm 0.5) \text{ V}
-\end{equation*}
-
-\noindent
-le cui incertezze sono state calcolate come descritto nell'\cref{appendice:errori_VA}.
+le cui incertezze sono state calcolate come descritto nell'\cref{appendice:errori_conduttanza}.
 
 Tramite l' \cref{eq:beta}, scegliendo come tensione di collettore $-V_{CE} = 3$
 V, si ottiene una stima del guadagno di corrente del transistor pari a
 \begin{equation*}
-	\beta = 113.267
+	\beta = 190.6
 \end{equation*}
 
 Per quanto riguarda gli andamenti delle caratteristiche di uscita del
@@ -375,22 +373,20 @@ regione attiva, all'aumentare della corrente di base, aumenta linearmente anche
 la corrente di collettore, confermando l'effetto Early. Tuttavia, si nota come
 i valori della tensione di Early ottenuti dai fit lineari per le due correnti
 di base considerate non siano compatibili tra loro entro l'incertezza
-sperimentale.
-
+sperimentale. Nonostante ciò, il valore della conduttanza per la corrente di base di $-100$ \mu A risulta maggiore rispetto a quella di $-50$
+\mu A, \err{compatibilmente col fatto che la tensione di Early debba essere unica per tutte le correnti, e che dunque la pendenza della retta della caratteristica in regione attiva debba essere maggiore per correnti più alte.}
 \section*{Conclusioni}
 
-I valori della tensione di Early ottenutiper le due correnti di base a $-50$
+I valori della tensione di Early ottenuti per le due correnti di base a $-50$
 \mu A e a $-100$ \mu A sono
 \begin{equation*}
-	V_{A,50} = (-21.7 \pm 1.1) \text{ V} \hspace{2cm} V_{A,100} = (-16.0 \pm 0.5) \text{ V}
+	V_{a,50} = (22 \pm 3) \text{ V} \hspace{2cm} V_{a,100} = (16.0 \pm 1.3) \text{ V}
 \end{equation*}
-\noindent
-risultando non compatibili tra loro entro l'incertezza sperimentale.
-
+risultando non compatibili tra loro entro l'incertezza sperimentale. Le stime per la conduttanza
 Invece, la stima del guadagno di corrente del transistor ottenuta scegliendo
 come tensione di collettore $-V_{CE} = 3$ V è pari a
 \begin{equation*}
-	\beta = 113.267
+	\beta = 190.6
 \end{equation*}
 
 \appendix
@@ -423,11 +419,10 @@ con $V_{mis}$ tensione misurata; l'errore sullo zero dell'oscilloscopio è stato
 \end{equation}
 
 \subsection{Calcolo dell'errore sulla tensione di Early}
-\label{appendice:errori_VA}
-L'errore sulla tensione di Early è stato calcolato propagando gli errori sui parametri del fit lineare secondo la formula
-
+\label{appendice:errori_conduttanza}
+L'errore sulla conduttanza $g$ è stato calcolato tramite propagazione degli errori a partire dall'\cref{eq:conduttanza} come
 \begin{equation}
-	\sigma_{V_{A}} = V_{A} \sqrt{\left(\frac{\sigma_{a}}{a}\right)^{2} + \left(\frac{\sigma_{b}}{b}\right)^{2}}
+    \sigma_{g} = \frac{\sigma_b}{b^2}
 \end{equation}
 
 \end{document}
